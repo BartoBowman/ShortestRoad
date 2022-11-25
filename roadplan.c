@@ -87,7 +87,8 @@ static City *create_map (FILE *data_file)
 		if (map == NULL)
 			/* This is the first city of the map */
 			map = city;
-		else {
+		else 
+		{
 			/* Find last of city list */
 			c = map;
 			while (c->next) c = c->next;
@@ -107,28 +108,34 @@ static City *create_map (FILE *data_file)
 	 */
 
 	fscanf(data_file, "%d", &num_of_roads);
-
 	for (i = 0; i < num_of_roads; i++)
 	{
 		char start_city[MAX_STRING_LENGTH + 1], end_city[MAX_STRING_LENGTH + 1];
 		int road_length;
-		City *city;
-		City *c;
+		City *start_pointer, *end_pointer;
+		Road *road, *last_road;
 
 		fscanf(data_file, "%s %s %d", start_city, end_city, &road_length);
 
-		if(find_city(map,start_city) == NULL)
+		start_pointer = find_city(map, start_city);		
+		printf ("test_start %s:\n", start_pointer->name);
+		end_pointer = find_city(map, end_city);
+		if(start_pointer == NULL)
 		{
 			printf("Cannot find city %s on the map", start_city);
 		}
-		else if(find_city(map,end_city) == NULL)
+		else if(end_pointer == NULL)
 		{
 			printf("Cannot find city %s on the map",end_city);
 		}
 		else
 		{
-			city = find_city(map,start_city);
-			new_road(start_city, end_city, road_length);
+			road = new_road(start_pointer, end_pointer, road_length);
+			last_road = start_pointer -> roads;
+			/*while(last_road->next) last_road = last_road->next;*/
+			/*printf("Addres last road %p and road %p\n",last_road,road);*/
+			last_road = road;
+			/*printf("last road %p and road %p\n",last_road,road);*/
 		}
 	}
 	
