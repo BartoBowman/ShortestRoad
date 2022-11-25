@@ -106,7 +106,8 @@ static City *create_map (FILE *data_file)
 	 *    Add it to the list of roads of the origin city.
 	 */
 
-	scanf("%d", &num_of_roads);
+	fscanf(data_file, "%d", &num_of_roads);
+
 	for (i = 0; i < num_of_roads; i++)
 	{
 		/* TODO add roads */
