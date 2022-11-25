@@ -60,7 +60,7 @@ static void delete_map (City *map)
  */
 static City *create_map (FILE *data_file)
 {
-	int num_of_cities, i;
+	int num_of_cities, num_of_roads, i;
 
 	City *map = NULL;
 
@@ -106,6 +106,12 @@ static City *create_map (FILE *data_file)
 	 *    Add it to the list of roads of the origin city.
 	 */
 
+	scanf("%d", &num_of_roads);
+	for (i = 0; i < num_of_roads; i++)
+	{
+		/* TODO add roads */
+	}
+	
 	return map;
 }
 
