@@ -110,7 +110,26 @@ static City *create_map (FILE *data_file)
 
 	for (i = 0; i < num_of_roads; i++)
 	{
-		/* TODO add roads */
+		char start_city[MAX_STRING_LENGTH + 1], end_city[MAX_STRING_LENGTH + 1];
+		int road_length;
+		City *city;
+		City *c;
+
+		fscanf(data_file, "%s %s %d", start_city, end_city, &road_length);
+
+		if(find_city(map,start_city) == NULL)
+		{
+			printf("Cannot find city %s on the map", start_city);
+		}
+		else if(find_city(map,end_city) == NULL)
+		{
+			printf("Cannot find city %s on the map",end_city);
+		}
+		else
+		{
+			city = find_city(map,start_city);
+			new_road(start_city, end_city, road_length);
+		}
 	}
 	
 	return map;
