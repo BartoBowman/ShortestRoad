@@ -97,16 +97,6 @@ static City *create_map (FILE *data_file)
 		}
 	}
 
-	/* FIXME (Assignment 5.1)
-	 * Read number of roads
-	 * For each road:
-	 *    Read origin city name, destination city name and length
-	 *    Find pointers to orgin city structure and destination city structure
-	 *    using the function find_city()
-	 *    Create new road structure using new_road() function
-	 *    Add it to the list of roads of the origin city.
-	 */
-
 	fscanf(data_file, "%d", &num_of_roads);
 	for (i = 0; i < num_of_roads; i++)
 	{
@@ -168,13 +158,6 @@ static void print_city_roads (City *map)
 
 static void find_shortest_roads (City *map)
 {
-	/* FIXME  (Assignment 5.2)
-	 * While input and input != "0"
-	 *    Find pointer to specified city using find_city()
-	 *    Visit the roads originating from this city,
-	 *    and find the road that has the shortest length
-	 *    Print the destination city and the road length.
-	 */
 	char city_name[MAX_STRING_LENGTH + 1];
 	char closest_destination_name[MAX_STRING_LENGTH + 1];
 	int shortest_road_length;
