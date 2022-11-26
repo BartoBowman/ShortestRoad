@@ -112,15 +112,14 @@ static City *create_map (FILE *data_file)
 	{
 		char start_city[MAX_STRING_LENGTH + 1], end_city[MAX_STRING_LENGTH + 1];
 		int road_length;
-		City *start_pointer, *end_pointer;
-		Road *road, *last_road;
+		City *city, *end_pointer;
+		Road *road;
 
 		fscanf(data_file, "%s %s %d", start_city, end_city, &road_length);
 
-		start_pointer = find_city(map, start_city);		
-		printf ("test_start %s:\n", start_pointer->name);
+		city = find_city(map, start_city);		
 		end_pointer = find_city(map, end_city);
-		if(start_pointer == NULL)
+		if(city == NULL)
 		{
 			printf("Cannot find city %s on the map", start_city);
 		}
@@ -130,12 +129,9 @@ static City *create_map (FILE *data_file)
 		}
 		else
 		{
-			road = new_road(start_pointer, end_pointer, road_length);
-			last_road = start_pointer -> roads;
-			/*while(last_road->next) last_road = last_road->next;*/
-			/*printf("Addres last road %p and road %p\n",last_road,road);*/
-			last_road = road;
-			/*printf("last road %p and road %p\n",last_road,road);*/
+			road = city->roads;
+			while(road != NULL) road = road->next;
+			city->roads = new_road(city, end_pointer, road_length);
 		}
 	}
 	
