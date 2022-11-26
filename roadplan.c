@@ -175,7 +175,43 @@ static void find_shortest_roads (City *map)
 	 *    and find the road that has the shortest length
 	 *    Print the destination city and the road length.
 	 */
+	char city_name[MAX_STRING_LENGTH + 1];
+	char closest_destination_name[MAX_STRING_LENGTH + 1];
+	int shortest_road_length;
+	City *city;
+	Road *road;
 
+	scanf("%s", city_name);
+	while(!strstr(city_name,"0"))
+	{
+		city = find_city(map, city_name);
+		if (city == NULL)
+		{
+			printf("City %s not on map\n", city_name);
+		}
+		else if (city->roads == NULL)
+		{
+			printf("City %s does not have roads\n", city_name);
+		}
+		else
+		{
+			road = city->roads;
+			shortest_road_length = road->length;
+			strcpy(closest_destination_name, road->destination->name);
+			while (road != NULL)
+			{
+				if (road->length < shortest_road_length)
+                {
+					shortest_road_length = road->length;
+					strcpy(closest_destination_name, road->destination->name);
+				}
+                road = road->next;
+			}
+			printf("Shortest road from city %s is to city %s: %d\n", city_name, closest_destination_name, shortest_road_length);
+		}
+
+		scanf("%s", city_name);
+	}
 }
 
 
