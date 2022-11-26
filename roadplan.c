@@ -116,9 +116,10 @@ static City *create_map (FILE *data_file)
 		Road *road;
 
 		fscanf(data_file, "%s %s %d", start_city_name, end_city_name, &road_length);
-
+		/* find both origin and destination city by name */
 		start_city = find_city(map, start_city_name);		
 		end_city = find_city(map, end_city_name);
+		/* check if either city does not exist */
 		if(start_city == NULL)
 		{
 			printf("Cannot find city %s on the map", start_city_name);
@@ -128,11 +129,13 @@ static City *create_map (FILE *data_file)
 			printf("Cannot find city %s on the map",end_city_name);
 		}
 		else
-		{			
+		{
+			/* if there are no roads in the origin city this road is the first */
 			if (start_city->roads == NULL)
 			{
 				start_city->roads = new_road(start_city, end_city, road_length);
 			}
+			/* otherwise find the first empty road */
 			else
 			{
 				road = start_city->roads;
