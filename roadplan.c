@@ -198,6 +198,7 @@ static void find_shortest_roads (City *map)
 			road = city->roads;
 			shortest_road_length = road->length;
 			strcpy(closest_destination_name, road->destination->name);
+			road = road->next;
 			while (road != NULL)
 			{
 				if (road->length < shortest_road_length)
