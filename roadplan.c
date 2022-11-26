@@ -110,34 +110,34 @@ static City *create_map (FILE *data_file)
 	fscanf(data_file, "%d", &num_of_roads);
 	for (i = 0; i < num_of_roads; i++)
 	{
-		char start_city[MAX_STRING_LENGTH + 1], end_city[MAX_STRING_LENGTH + 1];
+		char start_city_name[MAX_STRING_LENGTH + 1], end_city_name[MAX_STRING_LENGTH + 1];
 		int road_length;
-		City *city, *end_pointer;
+		City *start_city, *end_city;
 		Road *road;
 
-		fscanf(data_file, "%s %s %d", start_city, end_city, &road_length);
+		fscanf(data_file, "%s %s %d", start_city_name, end_city_name, &road_length);
 
-		city = find_city(map, start_city);		
-		end_pointer = find_city(map, end_city);
-		if(city == NULL)
+		start_city = find_city(map, start_city_name);		
+		end_city = find_city(map, end_city_name);
+		if(start_city == NULL)
 		{
-			printf("Cannot find city %s on the map", start_city);
+			printf("Cannot find city %s on the map", start_city_name);
 		}
-		else if(end_pointer == NULL)
+		else if(end_city == NULL)
 		{
-			printf("Cannot find city %s on the map",end_city);
+			printf("Cannot find city %s on the map",end_city_name);
 		}
 		else
 		{			
-			if (city->roads == NULL)
+			if (start_city->roads == NULL)
 			{
-				city->roads = new_road(city, end_pointer, road_length);
+				start_city->roads = new_road(start_city, end_city, road_length);
 			}
 			else
 			{
-				road = city->roads;
+				road = start_city->roads;
 				while(road->next != NULL) road = road->next;
-				road->next = new_road(city, end_pointer, road_length);
+				road->next = new_road(start_city, end_city, road_length);
 			}
 		}
 	}
