@@ -185,14 +185,17 @@ static void find_shortest_roads (City *map)
 	while(!strstr(city_name,"0"))
 	{
 		city = find_city(map, city_name);
+		/* special case if city does not exist */
 		if (city == NULL)
 		{
 			printf("City %s not on map\n", city_name);
 		}
+		/* another if city has no roads */
 		else if (city->roads == NULL)
 		{
 			printf("City %s does not have roads\n", city_name);
 		}
+		/* check for the closest destination and store name and length */
 		else
 		{
 			road = city->roads;
@@ -223,7 +226,7 @@ int main (int argc, char *argv[])
 	FILE *data_file = NULL;
 	City *map = NULL;
 
-	/* Check arguments		*/
+	/* Check arguments */
 	if (argc != 2)
 	{
 		fprintf (stdout, "Usage: %s <datafile>\n", argv[0]);
