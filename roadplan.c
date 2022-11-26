@@ -128,10 +128,17 @@ static City *create_map (FILE *data_file)
 			printf("Cannot find city %s on the map",end_city);
 		}
 		else
-		{
-			road = city->roads;
-			while(road != NULL) road = road->next;
-			city->roads = new_road(city, end_pointer, road_length);
+		{			
+			if (city->roads == NULL)
+			{
+				city->roads = new_road(city, end_pointer, road_length);
+			}
+			else
+			{
+				road = city->roads;
+				while(road->next != NULL) road = road->next;
+				road->next = new_road(city, end_pointer, road_length);
+			}
 		}
 	}
 	
